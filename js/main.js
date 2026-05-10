@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
 const tips = [
     "Join our Discord community",
     "Read the server rules",
-    "Press F4 for jobs",
+    "Press F4 for more information",
     "Invite your friends to the server",
     "Support the server by being active"
 ];
