@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GMod Loading Screen</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="background"></div>
+<div class="gradient"></div>
+<div class="blur-overlay"></div>
+
+<div class="content">
+
+    <div class="logo">
+        YOUR SERVER
+    </div>
+
+    <div class="subtitle">
+        Welcome to the server
+    </div>
+
+    <div class="progress-wrapper">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="status-text" id="status">
+            Starting connection...
+        </div>
+
+        <div class="files-text" id="files">
+            Preparing files...
+        </div>
+    </div>
+
+    <div class="tip-box">
+        TIP:
+        <span id="tip">Join our Discord community</span>
+    </div>
+
+</div>
+
+<audio id="bgMusic" autoplay loop preload="auto">
+    <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<script src="js/main.js"></script>
+</body>
+</html>
