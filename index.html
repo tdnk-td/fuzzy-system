@@ -11,45 +11,60 @@
 </head>
 <body>
 
-<div class="background"></div>
-<div class="gradient"></div>
-<div class="blur-overlay"></div>
+<img id="bg" src="img/background.jpg">
+
+<div class="overlay"></div>
 
 <div class="content">
 
-    <div class="logo">
-        YOUR SERVER
+    <div class="server-info">
+
+        <div class="server-name" id="servername">
+            LOADING SERVER
+        </div>
+
+        <div class="server-meta">
+            <span id="gamemode">Unknown Gamemode</span>
+            •
+            <span id="mapname">Unknown Map</span>
+        </div>
+
     </div>
 
-    <div class="subtitle">
-        Welcome to the server
-    </div>
+    <div class="download-panel">
 
-    <div class="progress-wrapper">
+        <div class="status" id="status">
+            Initializing...
+        </div>
+
+        <div class="file" id="currentFile">
+            Waiting for files...
+        </div>
+
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <div class="status-text" id="status">
-            Starting connection...
+        <div class="progress-text">
+            <span id="downloadedFiles">0</span>
+            /
+            <span id="totalFiles">0</span>
+            files
         </div>
 
-        <div class="files-text" id="files">
-            Preparing files...
-        </div>
     </div>
 
-    <div class="tip-box">
-        TIP:
-        <span id="tip">Join our Discord community</span>
+    <div class="tip" id="tip">
+        Press F4 for jobs
     </div>
 
 </div>
 
-<audio id="bgMusic" autoplay loop preload="auto">
+<audio id="bgMusic" autoplay loop>
     <source src="music/song.mp3" type="audio/mpeg">
 </audio>
 
 <script src="js/main.js"></script>
+
 </body>
 </html>

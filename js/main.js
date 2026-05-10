@@ -1,46 +1,107 @@
 const music = document.getElementById("bgMusic");
 
-window.addEventListener("load", () => {
-    music.volume = 0.25;
+let totalFiles = 0;
+let targetProgress = 0;
+let smoothProgress = 0;
 
-    const playPromise = music.play();
+const progressFill =
+    document.getElementById("progressFill");
 
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            console.log("Autoplay prevented.");
-        });
-    }
-});
+// Smooth animation loop
+setInterval(() => {
 
+    smoothProgress +=
+        (targetProgress - smoothProgress) * 0.08;
+
+    progressFill.style.width =
+        smoothProgress + "%";
+
+}, 16);
+
+// Rotating tips
 const tips = [
+    "Enjoy your time on the server",
     "Join our Discord community",
     "Read the server rules",
-    "Press F4 for more information",
-    "Invite your friends to the server",
-    "Support the server by being active"
+    "Invite friends to the server"
 ];
 
 let tipIndex = 0;
 
 setInterval(() => {
-    document.getElementById("tip").innerText = tips[tipIndex];
-    tipIndex = (tipIndex + 1) % tips.length;
+
+    document.getElementById("tip").innerText =
+        tips[tipIndex];
+
+    tipIndex =
+        (tipIndex + 1) % tips.length;
+
 }, 5000);
 
-// Cleaner loading callbacks
-window.SetStatusChanged = function(status) {
-    document.getElementById("status").innerText = status;
+window.GameDetails = function(
+    serverName,
+    serverURL,
+    mapName,
+    maxPlayers,
+    steamID,
+    gamemode,
+    volume,
+    language
+) {
+
+    document.getElementById("servername").innerText =
+        serverName;
+
+    document.getElementById("mapname").innerText =
+        mapName;
+
+    document.getElementById("gamemode").innerText =
+        gamemode;
+
+    // Respect player's game volume
+    music.volume = volume;
+
+    music.play().catch(() => {});
 };
 
+// Status callback
+window.SetStatusChanged = function(status) {
+
+    document.getElementById("status").innerText =
+        status;
+};
+
+// Total files callback
+window.SetFilesTotal = function(total) {
+
+    totalFiles = total;
+
+    document.getElementById("totalFiles").innerText =
+        total;
+};
+
+// Remaining files callback
 window.SetFilesNeeded = function(needed) {
-    document.getElementById("files").innerText =
-        `${needed} files remaining`;
 
-    // Smooth fake progress estimate
-    let progress = 100 - (needed / 4);
+    const downloaded =
+        totalFiles - needed;
 
-    progress = Math.max(10, Math.min(progress, 95));
+    document.getElementById("downloadedFiles").innerText =
+        downloaded;
 
-    document.getElementById("progressFill").style.width =
-        `${progress}%`;
+    if (totalFiles > 0) {
+
+        targetProgress =
+            (downloaded / totalFiles) * 100;
+    }
+};
+
+// Current file callback
+window.DownloadingFile = function(fileName) {
+
+    const cleanName =
+        fileName.split("/").pop();
+
+    document.getElementById("currentFile").innerText =
+        cleanName;
 };
