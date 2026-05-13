@@ -1,4 +1,19 @@
-const music = document.getElementById("bgMusic");
+const music =
+    document.getElementById("bgMusic");
+
+window.addEventListener("load", () => {
+
+    music.volume = 0.25;
+
+    const playMusic = () => {
+        music.play().catch(() => {});
+    };
+
+    playMusic();
+
+    setTimeout(playMusic, 1000);
+    setTimeout(playMusic, 3000);
+});
 
 let totalFiles = 0;
 let targetProgress = 0;
@@ -59,8 +74,13 @@ window.GameDetails = function(
         gamemode;
 
     // Respect player's game volume
-    music.volume = volume;
+    music.volume =
+        (typeof volume === "number" && volume > 0)
+            ? volume
+            : 0.25;
 
+    
+    
     music.play().catch(() => {});
 };
 
